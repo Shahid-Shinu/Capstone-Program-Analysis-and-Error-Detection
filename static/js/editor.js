@@ -9,7 +9,7 @@ let defaultCode = '#include <stdio.h> \r#include <stdlib.h>\r\rint main(){\r //W
 
 let program_files;
 var editors = {};
-
+var text_files = [];
 
 let editorLib = {
     clearConsoleScreen() {
@@ -55,8 +55,8 @@ let editorLib = {
 executeCodeBtn.addEventListener('click', () => {
     // Clear console messages
     editorLib.clearConsoleScreen();
-    console.log(program_files)
-    console.log(editors)
+    // console.log(program_files)
+    // console.log(editors)
 
     // for(var i=0; i< program_files.length; ++i){
     //     // try{
@@ -72,7 +72,7 @@ executeCodeBtn.addEventListener('click', () => {
         url: "/json_data_func",
         success: function(data){
             editorLib.printToConsole(data.a);
-            console.log(data.a);
+            // console.log(data.a);
         }
     });
     
@@ -154,19 +154,45 @@ editorLib.init(codeEditor);
 // }
 
 $.fn.addEditorTab = function(name, tabName, cur_file) {
-  $('ul', this).append('<li><a href="#tab-' + name + '">' + tabName + '</a><span class="ui-icon ui-icon-close" role="presentation"></li>');
-  $(this).append("<div id='tab-" + name + "' class='editor__body'><div id='editor-" + name + "' class='editor__code'></div></div>");
-  $(this).tabs("refresh");
+	$('ul', this).append('<li ><a id="editor-tab-'+name+'" href="#tab-' + name + '">' + tabName + '</a><span class="ui-icon ui-icon-close" role="presentation"></li>');
+	$(this).append("<div id='tab-" + name + "' class='editor__body'><div id='editor-" + name + "' class='editor__code'></div></div>");
+	$(this).tabs("refresh");
 
-  let codeEditor = ace.edit("editor-" + name);
+	let codeEditor = ace.edit("editor-" + name);
 
-  editorLib.init(codeEditor);
+	editorLib.init(codeEditor);
 
-  var reader = new FileReader();
+	var reader = new FileReader();
+
+	reader.onload = function(e)
+	{
+	    codeEditor.setValue(e.target.result);
+	    // console.log(e.target.result);
+	};
+	// var Range = ace.require('ace/range').Range;
+
+	// codeEditor.session.addMarker(new Range(1, 12, 15, 12), "ace_active-line", "fullLine");
+
+	reader.readAsBinaryString(cur_file);
+
+	$(this).tabs({ active: 1 });
+
+	return codeEditor;
+};
+
+$.fn.addMessages = function(name, cur_file, count) {
+	$("#testcase-list").append('<li id="testcase-tab'+count+'"><a href="#tab' + count+ '">' + name + '</a></li>');
+	$("#testcase-tabs").append('<div class="testcase-main" id="tab'+count+'"><p class="message-header">Compiler Message</p><div class="message__console"><ul class="message__console-logs"><li><pre id="tab'+count+'-1">hello this is me</pre></li></ul></div><p class="message-header">Input</p><div class="message__console"><ul class="message__console-logs"><li><pre id="tab'+count+'-2">hello this is me</pre></li></ul></div><p class="message-header">Your Output</p><div class="message__console"><ul class="message__console-logs"><li><pre id="tab'+count+'-3">hello this is me</pre></li></ul></div><p class="message-header">Expected Output</p><div class="message__console"><ul class="message__console-logs"><li><pre id="tab'+count+'-4">hello this is me</pre></li></ul></div></div>');
+	$(this).tabs("refresh");
+
+	 var reader = new FileReader();
 
     reader.onload = function(e)
     {
-        codeEditor.setValue(e.target.result);
+        $("#tab1-1").text(e.target.result);
+        $("#tab1-2").text(e.target.result);
+        $("#tab1-3").text(e.target.result);
+        $("#tab1-4").text(e.target.result);
         // console.log(e.target.result);
     };
     // var Range = ace.require('ace/range').Range;
@@ -174,12 +200,14 @@ $.fn.addEditorTab = function(name, tabName, cur_file) {
     // codeEditor.session.addMarker(new Range(1, 12, 15, 12), "ace_active-line", "fullLine");
   
     reader.readAsBinaryString(cur_file);
-
-  return codeEditor;
+    $(this).tabs({ active: 1 });
 };
 
 $(function() {
     $("#temp-tab").hide();
+    $("#code-compile-test-view").hide();
+    $("#testcase-tabs").tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+    // $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
     $('#multifilesForm').submit(function() {
         $(this).hide();
         var file = document.getElementById('multipleFiles');
@@ -187,6 +215,7 @@ $(function() {
         program_files = file.files;
 
         var tabs = $("#tabs").tabs();
+        var index = 0;
     
         for(var i=0; i<file.files.length; ++i){
 
@@ -197,27 +226,51 @@ $(function() {
             if(fileName.match(/\.c$/i)){
                 editors[filePath] = tabs.addEditorTab(filePath, fileName, cur_file);
             }
+            else{
+            	text_files[index] = cur_file;
+            	index++;
+            }
             // window.location = "#tab-main.c"
         }
 
             // editors[file2Path] = tabs.addEditorTab(file2Path, file2Name, file2Contents);
 
-            tabs.on("click", "span.ui-icon-close", function() {
-            var panelId = $(this).closest("li").remove().attr("aria-controls");
-            var editorId = panelId.replace("tab-", "editor-");
+        tabs.on("click", "span.ui-icon-close", function() {
+        var panelId = $(this).closest("li").remove().attr("aria-controls");
+        var editorId = panelId.replace("tab-", "editor-");
 
-            console.log("A, Editor: " + editorId);
-            $("div[id='" + editorId + "']").remove();
+        console.log("A, Editor: " + editorId);
+        $("div[id='" + editorId + "']").remove();
 
-            console.log("B, Panel: " + panelId);
-            $("div[id='" + panelId + "']").remove();
+        console.log("B, Panel: " + panelId);
+        $("div[id='" + panelId + "']").remove();
 
-            console.log("C");
-            editors[editorId.replace("editor-", "")].destroy();
+        console.log("C");
+        editors[editorId.replace("editor-", "")].destroy();
 
-            console.log("D");
-            tabs.tabs("refresh");
-            });
+        console.log("D");
+        tabs.tabs("refresh");
+        });
     });
+
+    $("#run_button").click(function(){
+    	$("#testcase-temp-tab").hide();
+    	$("#code-compile-test-view").show();
+    	$("#compile-message").text("Your Total Score is 10 marks");
+    	$("#testcase-passed").text("3/3 test cases failed");
+	    $("html, body").animate({
+	        scrollTop: $('html, body').get(0).scrollHeight
+	    }, 2000);
+
+	    var output_tabs = $("#testcase-tabs").tabs();
+
+	    for(var i=0;i<text_files.length;++i){
+	    	var cur_file = text_files[i];
+	    	var fileName = cur_file.name;
+	    	output_tabs.addMessages(fileName, cur_file, i+1);
+	    	// console.log(text_files[i]);
+	    }
+    });
+
 });
 
