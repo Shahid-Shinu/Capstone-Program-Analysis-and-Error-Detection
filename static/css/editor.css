@@ -19,7 +19,7 @@ html, body {
 .editor {
     height: 100%;
     width: 100%;
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     /* justify-content: center;
     align-items: center; */
@@ -92,6 +92,77 @@ html, body {
     border: 1px solid var(--editor-border);
 }
 
+.code-compile-test-view{
+	margin-top: 30px;
+	padding: 2em;
+   	/*height: 600px;*/
+   	/*width: 50%;*/
+   	/*flex-direction: column;*/
+   	background: var(--editor-bg);
+   	border-radius: 3px;
+    border: 1px solid #ccc;
+    font-family: OpenSans;
+    font-weight: 700;
+    /*bottom: 30px;*/
+    /*visibility: hidden;*/
+}
+
+
+.compile-message{
+	/*left: 30px;*/
+	width: 50%;
+    color: #d11534;
+    font-size: 22px;
+    background: white;
+    padding: .5em
+}
+
+.testcase-passed{
+	margin: 10px 0 20px;
+    color: #576871;
+    font-size: 16px;
+}
+
+.testcase-header{
+	/*height: 100px;*/
+	background: white;
+}
+
+/*.testcase-main{
+	border: 10px solid red;
+}*/
+
+.message-header{
+	/*margin: 10px 0 20px;*/
+    color: #576871;
+    font-weight: 400;
+    font-size: 14px;
+    /*padding: .5em*/
+}
+
+.message__console {
+    background-color: #eee;
+    color: black;
+    font-weight: 500;
+  	font-family: sans-serif;
+    width: 70%;
+    font-size: 1em;
+    margin-top: .5em;
+    margin-bottom: 1em;
+    max-height: 10em;
+    overflow: auto;
+}
+
+.message__console-logs {
+    padding: 10px;
+    list-style: none;
+}
+
+.message__console-logs li pre {
+    font-size: .8em;
+    font-family: sans-serif;
+}
+
 /* Editor Console Logs */
 .editor__console-logs {
     padding: 10px;
@@ -107,3 +178,11 @@ html, body {
     /* border-left: 5px solid red; */
     border-left: 5px solid var(--editor-border);
 }
+
+
+.ui-tabs-vertical { width: 55em; background: white;}
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 14.4em; background: white;}
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
