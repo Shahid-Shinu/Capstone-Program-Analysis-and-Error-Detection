@@ -2,8 +2,8 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="../static/css/editor.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/editor.css">
 
 	<title>Code Editor</title>
 </head>
@@ -21,7 +21,7 @@
 	        </div>
             <div class="editor__footer">
                 <div class="editor__footer--left">
-                    <button class="editor__btn editor__run">Run ></button>
+                    <button class="editor__btn editor__run" id="run_button">Run ></button>
                     <button class="editor__btn editor__reset" onclick="window.location.reload();">Reset ></button>
                 </div>
                 <div class="editor__footer--right">
@@ -38,7 +38,59 @@
                     <input type="file" id="multipleFiles"  name="files" multiple >
                 </form>
             </div>
-
+        </div>
+        <div class="code-compile-test-view" id="code-compile-test-view">
+            <div class="compile-message-wrapper">
+                <p class="compile-message" id="compile-message">Your Total Score is 10 marks</p>
+                <p class="testcase-passed" id="testcase-passed">2/2 test cases failed</p>
+            </div>
+            <div class="testcase-header" id="testcase-tabs">
+                <ul id="testcase-list">
+                    <li id="testcase-temp-tab"><a href="#tab0">First</a></li>
+                </ul>
+                <div class="testcase-main" id="tab0">
+                    <p class="message-header">Compiler Message</p>
+                    <div class="message__console">
+                        <ul class="message__console-logs">
+                            <li>
+                                <pre id="tab0-1">
+                                    hello this is me
+                                </pre>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="message-header">Input</p>
+                    <div class="message__console">
+                        <ul class="message__console-logs">
+                            <li>
+                                <pre id="tab0-2">
+                                    hello this is me
+                                </pre>
+                            </li>                            
+                        </ul>
+                    </div>
+                    <p class="message-header">Your Output</p>
+                    <div class="message__console">
+                        <ul class="message__console-logs">
+                            <li>
+                                <pre id="tab0-3">
+                                    hello this is me
+                                </pre>
+                            </li>                            
+                        </ul>
+                    </div>
+                    <p class="message-header">Expected Output</p>
+                    <div class="message__console">
+                        <ul class="message__console-logs">
+                            <li>
+                                <pre id="tab0-4">
+                                    hello this is me
+                                </pre>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
