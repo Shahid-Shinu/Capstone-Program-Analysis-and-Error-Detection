@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../static/css/editor.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/jquery-ui.min.css">
+
+	<title>Code Editor</title>
+</head>
+
+<body>
+    <div class="editor">
+        <div class="editor__wrapper">
+    		<div id="tabs" class="editor__wrapper">
+    			<ul>
+    				<li id="temp-tab"><a href="#tabs-1">First</a></li>
+		        </ul>
+			    <div class="editor__body" id="tabs-1">
+		            <div id="editorCode" class="editor__code"></div>
+		        </div>
+	        </div>
+            <div class="editor__footer">
+                <div class="editor__footer--left">
+                    <button class="editor__btn editor__run">Run ></button>
+                    <button class="editor__btn editor__reset" onclick="window.location.reload();">Reset ></button>
+                </div>
+                <div class="editor__footer--right">
+                    <div class="editor__console">
+                        <ul class="editor__console-logs"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="editor__footer--bottom">
+                <form id="multifilesForm" method=post enctype=multipart/form-data>
+                    
+                    <!-- <input type="submit" class="editor__btn" onclick="fileDisplay()"> -->
+                    <input type="submit" class="editor__btn">
+                    <input type="file" id="multipleFiles"  name="files" multiple >
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+	<!-- required Ace scripts -->
+	<script src="../static/js/ace-editor/src-min/ace.js"></script>
+	<script src="../static/js/ace-editor/src-min/ext-language_tools.js"></script>
+	<script src="../static/js/ace-editor/src-min/mode-c_cpp.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/jquery-ui.js"></script>
+
+	<!-- Our scripts -->
+	<script src="../static/js/editor.js"></script>
+</body>
+
+</html>

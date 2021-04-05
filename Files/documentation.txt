@@ -1,0 +1,46 @@
+DEPENDENDIES:
+
+python3
+
+flask(env), subprocess
+
+gdb, valgrind
+
+(sudo autorun -f) --> install dependencies if apt get fails
+
+https://github.com/ajaxorg/ace-builds/
+
+
+
+HOW TO RUN:
+
+FLASK:
+
+Create an environment:
+python3 -m venv venv
+
+Activate the environment:
+. venv/bin/activate
+
+In venv:
+
+pip freeze > requirements.txt
+
+other machine: pip install -r requirements.txt	
+
+
+
+WEB INTERFACE:
+Coder Archive Youtube Channel
+
+
+https://ace.c9.io/ -- For embedding Code editor
+
+https://stackoverflow.com/questions/59004560/how-can-i-open-a-file-into-ace-text-editor -- open files in ace
+
+ace editor for multiple tabs
+
+
+C-TUTOR:
+https://github.com/zorga/INGInious-C-Tutor
+

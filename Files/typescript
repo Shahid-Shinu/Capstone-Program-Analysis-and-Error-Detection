@@ -1,0 +1,4 @@
+Script started on 2021-03-11 23:52:31+05:30 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="190" LINES="44"]
+bash: line 1: out.txt: command not found
+
+Script done on 2021-03-11 23:52:31+05:30 [COMMAND_EXIT_CODE="127"]
