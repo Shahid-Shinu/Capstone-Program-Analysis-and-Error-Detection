@@ -16,6 +16,13 @@ html, body {
     width: 100%;
 }
 
+a {
+     text-decoration: none;
+     display: block;
+     width: 100%;
+     height: 100%;
+}
+
 .editor {
     height: 100%;
     width: 100%;
@@ -126,6 +133,7 @@ html, body {
 .testcase-header{
 	/*height: 100px;*/
 	background: white;
+	width: 100%;
 }
 
 /*.testcase-main{
@@ -145,7 +153,7 @@ html, body {
     color: black;
     font-weight: 500;
   	font-family: sans-serif;
-    width: 70%;
+    width: 100%;
     font-size: 1em;
     margin-top: .5em;
     margin-bottom: 1em;
@@ -159,7 +167,7 @@ html, body {
 }
 
 .message__console-logs li pre {
-    font-size: .8em;
+    font-size: 1em;
     font-family: sans-serif;
 }
 
@@ -179,10 +187,47 @@ html, body {
     border-left: 5px solid var(--editor-border);
 }
 
+.myMarker {
+  position:absolute;
+  background:rgba(230, 40, 25,.9);
+  z-index:20
+}
 
-.ui-tabs-vertical { width: 55em; background: white;}
+
+.ui-tabs-vertical { width: 80em; background: white;}
 .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 14.4em; background: white;}
 .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
 .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; color: #d11534; outline:none;}
+.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 65em;}
+
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    /*color: #d11534;*/
+    /*background: #d11534;*/
+    outline:none;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited, a.ui-button, a:link.ui-button, a:visited.ui-button, .ui-button {
+    color: black;
+}
+
+.status1{
+    color: #d11534;
+    background: #ff3647;
+}
+
+.status2{
+    color: green;
+    background: #4ed44e;
+}
+
+/*.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #ffffffff;
+    background: #ffffffff;
+    font-weight: 800;
+}
+
+.ui-state-focus:focus { outline:none; }
+
+#tabs ul li a:focus {     outline:none; }*/
