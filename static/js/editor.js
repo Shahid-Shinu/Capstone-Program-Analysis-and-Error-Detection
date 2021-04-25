@@ -193,6 +193,10 @@ function updateMarks(codeData){
 
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // $.fn.highlighter = function(){
 // // console.log(document.this.parent().attr("id"));
 // 	console.log("hi");
@@ -365,7 +369,7 @@ $(function() {
     $("#run_button").hide();
     $('#multifilesForm').submit(function() {
         $(this).hide();
-        $("#run_button").show();
+        //$("#run_button").show();
         var file = document.getElementById('multipleFiles');
         // console.log(file.files)
         program_files = file.files;
@@ -391,6 +395,7 @@ $(function() {
             }
             // window.location = "#tab-main.c"
         }
+        //$("#run_button").show();
 
             // editors[file2Path] = tabs.addEditorTab(file2Path, file2Name, file2Contents);
 
@@ -410,6 +415,9 @@ $(function() {
         console.log("D");
         tabs.tabs("refresh");
         });
+
+        sleep(1500).then(() => { $("#run_button").show(); });
+        // $("#run_button").show();
     });
 
     $("#run_button").click(function(){
