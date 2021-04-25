@@ -3,9 +3,10 @@ from flask import Flask, flash, request, redirect, url_for,send_from_directory,r
 from werkzeug.utils import secure_filename
 import gdb_interface
 import time
+import sys
 
 UPLOAD_FOLDER = './files'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','c'}
+ALLOWED_EXTENSIONS = {'txt','dat','c','h'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 a = ''
@@ -17,29 +18,34 @@ def allowed_file(filename):
 @app.route('/',methods=['GET', 'POST'])
 def upload_file():
     global a
-    if request.method == 'POST':
-        # check if the post request has the file part
-        print(request.files)
-        if 'files' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        files = request.files.getlist("files")
-        print(files)
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if len(files)==0:
-            flash('No selected file')
-            return redirect(request.url)
-        result=''
-        if len(files) :
-            for file in files:
-                filename = secure_filename(file.filename)
-                result+=filename+' '
-                file.save(os.path.join(filename))
-            # time.sleep(10)
-            a=gdb_interface.hello_world(result)
-            # return a
-            return ('',204)
+    try:
+        if request.method == 'POST':
+            # check if the post request has the file part
+            print(request.files)
+            if 'files' not in request.files:
+                flash('No file part')
+                return redirect(request.url)
+            files = request.files.getlist("files")
+            print(files)
+            # if user does not select file, browser also
+            # submit an empty part without filename
+            if len(files)==0:
+                flash('No selected file')
+                return redirect(request.url)
+            result=''
+            if len(files) :
+                for file in files:
+                    filename = secure_filename(file.filename)
+                    result+=filename+' '
+                    file.save(os.path.join(filename))
+                # time.sleep(10)
+                a=gdb_interface.hello_world(result)
+                # return a
+                # print("asdhjajsd\n",a)
+                return ('',204)
+    except:
+        print("Oops!", sys.exc_info()[0], "occurred.")
+        return ('',204)
 
     return render_template('index.html')
 
