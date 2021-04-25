@@ -26,6 +26,7 @@ void init(char **argv)
 int main(int argc, char **argv) {
 	if(argc > 1) init(argv);
 	int choice;
+
 	List* list = list_initialize();
 	do {
 		scanf("%d", &choice);
@@ -70,14 +71,17 @@ List* list_initialize() {
 
 void list_print(List* list) 
 	{
+	int res;
 	Node *p;
 	p=list->head;
 	if(p == NULL)
 	{
+		res = 0;
 		printf("EMPTY\n");
 		return;
 	}
 	while (p!=NULL){
+		res = p->data;
 		printf("%d ",p->data);
 		p=p->link;
 	}
